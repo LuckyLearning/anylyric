@@ -16,8 +16,8 @@ plugins {
  * AnyLyric 版本号，只递增第三位（0.2.x）。
  * 发版脚本与 CI 都按下面两行的固定文本格式解析，改格式前先改它们。
  */
-val anyLyricVersionName = "0.2.29"
-val anyLyricVersionCode = 31
+val anyLyricVersionName = "0.2.30"
+val anyLyricVersionCode = 32
 
 /**
  * 签名密钥必须与历史版本一致，否则用户无法覆盖安装。

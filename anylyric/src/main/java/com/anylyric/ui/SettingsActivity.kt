@@ -1941,6 +1941,10 @@ class SettingsActivity : BaseActivity() {
         val preview = text("", 12f, secondary = true).apply {
             setPadding(dp(2), dp(2), 0, 0)
         }
+        // 歌词来源（0.2.30）：校准时判断偏移值要不要信，先看这句词是播放器推的还是联网补的。
+        // 在线词再带一个站点名 —— 「在线补词 · 酷狗」比只说「在线补词」更能判断时间轴靠不靠谱。
+        val sourceLine = text(getString(R.string.calibrate_source_none), 11.5f, secondary = true)
+            .apply { setPadding(dp(2), dp(2), 0, 0) }
         val defaultLine = text("", 12f, secondary = true)
 
         val steps = LinearLayout(this).apply {
@@ -1965,6 +1969,7 @@ class SettingsActivity : BaseActivity() {
         rows += hint(getString(R.string.calibrate_direction_hint))
         rows += divider(12, 8)
         rows += preview
+        rows += sourceLine
         rows += divider(12, 8)
         rows += defaultLine
         rows += row(
@@ -1994,6 +1999,8 @@ class SettingsActivity : BaseActivity() {
                 else -> getString(R.string.calibrate_custom)
             }
             preview.text = previewText()
+            sourceLine.text = lyricSourceLabel()?.let { getString(R.string.calibrate_source_fmt, it) }
+                ?: getString(R.string.calibrate_source_none)
             val stats = hub.statsSnapshot()
             statsLine.text = when {
                 stats.sessions == 0 -> getString(R.string.calibrate_stats_none)
@@ -2078,6 +2085,22 @@ class SettingsActivity : BaseActivity() {
         }
         if (sb.isEmpty()) sb.append(getString(R.string.calibrate_no_preview))
         return sb.toString()
+    }
+
+    /**
+     * 校准页来源行的正文（不含「歌词来源：」前缀，前缀交给 [R.string.calibrate_source_fmt]）。
+     * null = 当前没有歌词，由调用方显示 [R.string.calibrate_source_none]。
+     *
+     * 通道名复用状态卡的 [channelLabel]（L0 / L1 / 通知 / 车机直连 / 本地 / 在线），
+     * 只有在线词才追加具体站点 —— 与状态卡「歌词版本 2/3 · 酷狗」是同一套映射，
+     * 两处说法必须一致，否则用户会以为看到的是两回事。
+     */
+    private fun lyricSourceLabel(): String? {
+        val hit = hub.currentStatus().hitSource ?: return null
+        val channel = channelLabel(hit)
+        if (hit != "ONLINE") return channel
+        val site = hub.lyricVariantSource()?.let { sourceName(it) }
+        return if (site != null) "$channel · $site" else channel
     }
 
     private fun clockText(ms: Long): String {

@@ -375,6 +375,9 @@ If that entry does not exist, it is fine: turn on “Start on boot” above and 
     <string name="calibrate_cleared">All calibration cleared</string>
     <string name="calibrate_line_pos">Line %1$d/%2$d</string>
     <string name="calibrate_no_preview">No lyrics to preview yet</string>
+    <!-- 校准页的歌词来源：校准时最需要知道这句词是谁给的，不同通道的时间轴可信度不同。 -->
+    <string name="calibrate_source_fmt">Lyric source: %1$s</string>
+    <string name="calibrate_source_none">Lyric source: none</string>
     <string name="calibrate_stats_none">No samples yet (a session must run 30s to count)</string>
     <string name="calibrate_stats_no_lyrics">%1$d sessions, none produced lyrics</string>
     <string name="calibrate_stats_fmt">Last %1$d sessions · lyrics %2$d%% · first line %3$d ms</string>
