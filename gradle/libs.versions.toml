@@ -1,0 +1,20 @@
+#
+# Gradle Version Catalog —— AnyLyric 独立仓库的构建插件与依赖版本来源。
+#
+# 约定：版本号只写在 [versions]，坐标只写在 [libraries] / [plugins]；
+#       build.gradle.kts 里一律用 libs.xxx 访问器，不出现字面版本号。
+# 本应用运行时零第三方依赖，只有 JUnit 进测试 classpath。
+#
+# 与 Gradle wrapper 配套：AGP 8.7.x ↔ Gradle 8.9 ↔ JDK 17 target（编译用 JDK 21 跑）。
+
+[versions]
+agp = "8.7.2"
+kotlin = "2.0.21"
+junit = "4.13.2"
+
+[libraries]
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

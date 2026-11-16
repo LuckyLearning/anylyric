@@ -1,0 +1,132 @@
+# ============================================================
+#  密钥与本地专属配置  —— 绝对不能入库
+# ============================================================
+.github-token
+.github-token.local
+local.properties
+
+# 签名密钥与口令 —— 任何形式的本地签名配置都不许入库
+*.jks
+*.keystore
+*.p12
+*.jks.bak
+keystore.properties
+key.properties
+signing.properties
+secrets.properties
+
+# ============================================================
+#  本地工具链（内含完整 Android SDK，数百 MB）
+# ============================================================
+.toolchain/
+
+# ============================================================
+#  文档：docs/ 是 GitHub Pages 的发布目录（main 分支 /docs）
+#  —— 因此必须入库；只忽略其中的本地备份与构建缓存
+# ============================================================
+docs/**/*.bak
+docs/**/*.bak-*
+docs/**/*.tmp
+docs/_site/
+docs/.jekyll-cache/
+docs/.jekyll-metadata
+
+# ============================================================
+#  构建产物
+# ============================================================
+build/
+*/build/
+out/
+.gradle/
+.kotlin/
+cxx/
+.cxx/
+captures/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+*.hprof
+release/
+logs/
+
+# ============================================================
+#  Android Studio / IntelliJ
+# ============================================================
+.idea/
+*.iml
+*.iws
+*.ipr
+.navigation/
+freeline/
+
+# ============================================================
+#  系统 / 编辑器
+# ============================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.swp
+*~
+.vscode/
+
+# 例外：保留 .github-token 的模板文件，方便他人配置
+!.github-token.example
+
+# 本机验证截图（模拟器 / 真机手拍，不入库）
+.shots/
+
+# 会话沟通记录（本机，不入库）
+.history/
+
+# 百度网盘开放平台凭据（本机开发用，绝不入库）
+baiduAppKey
+SecretKey
+# 阿里云盘开放平台凭据（本机开发用，绝不入库）
+aliyunClientId
+aliyunClientSecret
+# local agent scratch (never commit)
+# 根目录临时脚本 / 日志 / 隔离构建 / park 工作区 —— 一律不入库
+_a2_*.py
+_a11y_*
+_bal9_*
+_g3_*
+_g8_*
+_h3_*
+_h4_*
+_h7_*
+_eq*
+_diag*
+_e1_*
+_e2_*
+_b1_*
+_fix_*
+_write_*
+_patch_*
+_run_*.sh
+_rel_snip.txt
+_release_log.txt
+_gh_rel.json
+_fetch_rel.sh
+_*.tmp
+_h3_work/
+_h7_work/
+_g8_recover/
+_park_*/
+_gradle_*/
+_gradle_h3_iso/
+_build_*/
+.gradle-diag*/
+_agent_tmp*/
+*_dead/
+_g8_commit.py
+_run_i18n_release.sh
+_run_release.sh
+
+# 根目录一次性 agent 脚本（字母数字短前缀）
+_scan_*.sh
+_edit*.py
+_rd*.txt
+_rd*.sh
